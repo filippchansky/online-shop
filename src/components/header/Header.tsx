@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/Logo.svg";
+import putin from '../../img/bannerMobile.jpg'
 import Burger from "../UI/burgerMenu/Burger";
+import ModalWindow from "../UI/modalWindow/ModalWindow";
 import style from "./header.module.css";
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = ({}) => {
   const [burgerActive, setBurgerActive] = useState(false);
+  const [modalActive, setModalActive] = useState(false)
 
   return (
     <header className={style.header}>
@@ -48,7 +51,10 @@ const Header: React.FC<HeaderProps> = ({}) => {
             <li className={style.nav__item}>Меню 3</li>
           </ul>
         </nav>
-        <button className={style.btn__header}>Кнопка</button>
+        <button className={style.btn__header} onClick = {()=> setModalActive(!modalActive)}>Кнопка</button>
+        <ModalWindow active={modalActive} setActive={setModalActive}>
+          <img src={putin} alt="" />
+        </ModalWindow>
       </div>
     </header>
   );
