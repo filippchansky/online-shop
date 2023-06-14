@@ -1,0 +1,20 @@
+.banner {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.banner__title {
+  position: absolute;
+  z-index: 1;
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 127%;
+  color: white;
+  bottom: 40px;
+  left: 80px;
+}

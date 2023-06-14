@@ -1,0 +1,36 @@
+.swiper__container {
+    margin-top: 150px;
+    padding: 10px;
+}
+
+.swiper {
+    padding: 20px;
+}
+
+.swiper-wrapper {
+    margin-top: 40px;
+}
+
+.swiper-button-prev {
+    top: 30px;
+    color: gray;
+    border-radius: 50px;
+    width: 50px;
+    box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.2);
+}
+
+.swiper-button-prev::after {
+    font-size: 20px;
+}
+
+.swiper-button-next {
+    top: 30px;
+    color: gray;
+    border-radius: 50px;
+    width: 50px;
+    box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.2);
+}
+
+.swiper-button-next::after {
+    font-size: 20px;
+}
