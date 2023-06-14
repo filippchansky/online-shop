@@ -34,3 +34,11 @@
 .swiper-button-next::after {
     font-size: 20px;
 }
+
+
+@media (max-width:600px) {
+    .swiper__container {
+        margin-top: 50px;
+        padding: 0px;
+    }
+}

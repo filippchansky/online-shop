@@ -18,3 +18,11 @@
   bottom: 40px;
   left: 80px;
 }
+
+@media (max-width:900px) {
+  .banner__title{
+   font-size: 24px;
+   bottom: 10px;
+   left: 60px;
+  }
+}
