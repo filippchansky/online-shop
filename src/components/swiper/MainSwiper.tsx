@@ -13,9 +13,11 @@ const MainSwiper: React.FC<MainSwiperProps> = ({}) => {
 
     const [width, setWidth] = useState(window.innerWidth)
 
-    if (width<1350) {
-        sliderCount = 2
+    if (width<790) {
+        sliderCount = 1
         console.log(sliderCount)
+    }else if (width<1350){
+      sliderCount = 2
     }
   return (
     <div className="swiper__container container">
