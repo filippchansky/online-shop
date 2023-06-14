@@ -19,11 +19,6 @@ const Footer: React.FC<FooterProps> = ({}) => {
             <li><a href="#">Ссылка в подвале</a></li>
             <li><a href="#">Ссылка в подвале</a></li>
             <li><a href="#">Ссылка в подвале</a></li>
-            <li><a href="#">Ссылка в подвале</a></li>
-            <li><a href="#">Ссылка в подвале</a></li>
-            <li><a href="#">Ссылка в подвале</a></li>
-            <li><a href="#">Ссылка в подвале</a></li>
-            <li><a href="#">Ссылка в подвале</a></li>
         </ul>
       </div>
     </footer>
