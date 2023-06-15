@@ -1,4 +1,6 @@
 import React from 'react'
+import Catalog from '../components/catalog/Catalog';
+import CatalogTitle from '../components/catalogTitle/CatalogTitle';
 
 interface CatalogPageProps {
     
@@ -7,7 +9,10 @@ interface CatalogPageProps {
 const CatalogPage:React.FC<CatalogPageProps> = ({}) => {
     
     return (
-        <h1>catalog</h1>
+        <>
+        <CatalogTitle/>
+        <Catalog/>
+        </>
     )
 }   
 export default CatalogPage;

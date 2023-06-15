@@ -1,0 +1,18 @@
+.container {
+  max-width: 100%;
+  background-color: rgba(69, 24, 253, 0.9);
+  opacity: 0.2;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.title {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 127%;
+    color: rgba(0, 0, 0, 10);
+    opacity: 1;
+}
