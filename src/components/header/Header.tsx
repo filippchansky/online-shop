@@ -12,6 +12,10 @@ const Header: React.FC<HeaderProps> = ({}) => {
   const [burgerActive, setBurgerActive] = useState(false);
   const [modalActive, setModalActive] = useState(false)
 
+  function hello () {
+    alert('hello')
+  }
+
   return (
     <header className={style.header}>
       <Burger active={burgerActive} setActive={setBurgerActive}>

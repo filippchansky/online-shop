@@ -51,7 +51,4 @@ const MainSwiper: React.FC<MainSwiperProps> = ({}) => {
   );
 };
 export default MainSwiper;
-function usestate(): [any, any] {
-    throw new Error("Function not implemented.");
-}
 
