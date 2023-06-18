@@ -1,17 +1,18 @@
 import React from 'react'
+import { IPhotos } from '../../models/models'
 import style from "./catalogcard.module.css"
 
 interface CatalogCardProps {
-    
+    item: IPhotos
 }
 
-const CatalogCard:React.FC<CatalogCardProps> = ({}) => {
+const CatalogCard:React.FC<CatalogCardProps> = ({item}) => {
     
     return (
         <div className={style.card__container}>
-            <img src="https://via.placeholder.com/300x202" alt="" className={style.card__img} />
+            <img src={item.url} alt="" className={style.card__img} />
             <div className={style.card__info}>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam ratione assumenda voluptate architecto quas voluptas </p>
+                <p>{item.title}</p>
             </div>
         </div>
     )
