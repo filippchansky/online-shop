@@ -5,12 +5,12 @@ import { IPhotos } from "../../models/models";
 export const backendApi = createApi({
     reducerPath: 'backend/api',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://jsonplaceholder.typicode.com/'
-    }),
+        baseUrl: 'http://04e1-95-189-186-88.ngrok-free.app/',
+    }),  
     endpoints: build => ({
-        searchUsers: build.query<IPhotos[],string>({
+        searchProducts: build.query<IPhotos[],string>({
             query: (count: string) => ({
-                url: `photos/?_limit=${count}`,
+                url: ``,
             })
         })
     })
@@ -18,4 +18,4 @@ export const backendApi = createApi({
 
 
 
-export const {useSearchUsersQuery} = backendApi
+export const {useSearchProductsQuery} = backendApi

@@ -1,6 +1,8 @@
 export interface IPhotos {
-    id: number
-    title: string
-    url: string
-    thumbnailUrl: string
+    productId: number
+    productName: string
+    description: string
+    price: string
+    brand: string
+    category: string
 }

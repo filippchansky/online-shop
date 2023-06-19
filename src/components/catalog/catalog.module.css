@@ -3,3 +3,9 @@
     display: flex;
     gap: 30px;
 }
+
+@media (max-width:1350px) {
+    .catalog__container {
+        flex-direction: column;
+    }
+}

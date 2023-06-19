@@ -10,10 +10,10 @@ const CatalogCard:React.FC<CatalogCardProps> = ({item}) => {
     
     return (
         <div className={style.card__container}>
-            <img src={item.url} alt="" className={style.card__img} />
+            {/* <img src={item.url} alt="" className={style.card__img} />
             <div className={style.card__info}>
                 <p>{item.title}</p>
-            </div>
+            </div> */}
         </div>
     )
 }
