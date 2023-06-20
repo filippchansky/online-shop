@@ -29,22 +29,22 @@ const MainSwiper: React.FC<MainSwiperProps> = ({}) => {
         navigation
         >
         <SwiperSlide>
-          <SwiperCard count="1" />
+          <SwiperCard />
         </SwiperSlide>
         <SwiperSlide>
-          <SwiperCard count="2" />
+          <SwiperCard />
         </SwiperSlide>
         <SwiperSlide>
-          <SwiperCard count="3" />
+          <SwiperCard />
         </SwiperSlide>
         <SwiperSlide>
-          <SwiperCard count="4" />
+          <SwiperCard />
         </SwiperSlide>
         <SwiperSlide>
-          <SwiperCard count="5" />
+          <SwiperCard />
         </SwiperSlide>
         <SwiperSlide>
-          <SwiperCard count="6" />
+          <SwiperCard />
         </SwiperSlide>
       </Swiper>
     </div>

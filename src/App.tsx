@@ -7,6 +7,7 @@ import CatalogPage from "./pages/CatalogPage";
 import MainPage from "./pages/MainPage";
 import "./adaptive.css"
 import AboutProduct from "./pages/AboutProduct";
+import TestPost from "./pages/TestPost";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<MainPage />}/>
         <Route path="/catalog" element={<CatalogPage />} />
         <Route path="/catalog/:id" element = {<AboutProduct/>}/>
+        <Route path="/testpost" element = {<TestPost/>}/>
       </Routes>
       <Footer/>
     </>

@@ -1,17 +1,16 @@
 import React from 'react'
 import style from './swipercard.module.css'
-import swiperImg from "../../img/prigozhin.jpg"
+import swiperImg from "../../img/nike_shoes.jpg"
 
 interface SwiperCardProps {
-    count: string
 }
 
-const SwiperCard:React.FC<SwiperCardProps> = ({count}) => {
+const SwiperCard:React.FC<SwiperCardProps> = () => {
     
     return (
         <div className={style.card}>    
             <div className={style.card__content}>
-                <h1>{count}</h1>
+                <h1></h1>
                 <img src={swiperImg} alt="" />
             </div>
         </div>

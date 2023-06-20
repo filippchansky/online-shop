@@ -18,7 +18,7 @@ const AboutProduct:React.FC<AboutProductProps> = ({}) => {
     return (
         <>
         {data?.map(product => (
-            <CatalogTitle title={product.brand}/>
+            <CatalogTitle key={product.productId} title={product.brand}/>
         ))}
         <div className='container'>
             {data?.map(product => (
