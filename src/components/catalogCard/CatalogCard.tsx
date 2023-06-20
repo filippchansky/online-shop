@@ -1,20 +1,25 @@
 import React from 'react'
-import { IPhotos } from '../../models/models'
+import { Link } from 'react-router-dom'
+import { IProducts } from '../../models/models'
 import style from "./catalogcard.module.css"
 
 interface CatalogCardProps {
-    item: IPhotos
+    product: IProducts
 }
 
-const CatalogCard:React.FC<CatalogCardProps> = ({item}) => {
+const CatalogCard:React.FC<CatalogCardProps> = ({product}) => {
     
     return (
+        
         <div className={style.card__container}>
-            {/* <img src={item.url} alt="" className={style.card__img} />
+            <img src='https://via.placeholder.com/300' alt="" className={style.card__img} />
             <div className={style.card__info}>
-                <p>{item.title}</p>
-            </div> */}
+                <p>id: {product.productId}</p>
+                <p>name: {product.productName}</p>
+                <p>price: {product.price}</p>
+            </div>
         </div>
+        
     )
 }
 export default CatalogCard;

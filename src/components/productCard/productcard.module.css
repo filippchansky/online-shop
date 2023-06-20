@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 20px;
+  margin-top: 100px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  border-radius: 10px;
+}
+
+.section__img {
+  max-width: 500px;
+}
+
+.section__info {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.name {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 35px;
+  line-height: auto;
+}
+
+.price {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 35px;
+  line-height: auto;
+}
+
+.description {
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+opacity: .8;
+font-size: 15px;
+line-height: auto;
+}
+
+
+@media (max-width:1350px) {
+    .container {
+        flex-direction: column;
+        margin-top: 0;
+    }
+
+    .section__info {
+        gap: 20px;
+    }
+}
