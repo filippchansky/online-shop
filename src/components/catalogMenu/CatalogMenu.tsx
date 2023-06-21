@@ -5,24 +5,54 @@ import style from "./catalogmenu.module.css";
 
 interface CatalogMenuProps {}
 
-const items: MenuProps['items'] = [
-    {
-      key: '2',
-      label: (
-        <Link to={`/catalog/asc`}>
-        <p >
-          По возврастанию
-        </p>
-        </Link>
-      ),
-    },
-  ];
+const items: MenuProps["items"] = [
+  {
+    key: "1",
+    label: (
+      <Link to={`/catalog/sortBy=price&sortOrder=asc`}>
+        <p>По возврастанию</p>
+      </Link>
+    ),
+  },
+  {
+    key: "2",
+    label: (
+      <Link to={`/catalog/sortBy=price&sortOrder=desc`}>
+        <p>По убыванию</p>
+      </Link>
+    ),
+  },
+  {
+    key: "3",
+    label: (
+      <Link to={`/catalog/sortBy=createDate&sortOrder=desc`}>
+        <p>Сначала новые</p>
+      </Link>
+    ),
+  },
+];
+
+const item: MenuProps["items"] = [
+  {
+    key: "1",
+    label: (
+      <Link to={`/catalog/sortBy=price&sortOrder=asc`}>
+        <p>Пqwe</p>
+      </Link>
+    ),
+  },
+];
+
+
 
 const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
   return (
     <div className={style.menu__container}>
-      <Dropdown menu={{ items }} placement="bottom">
+      <Dropdown key={'1'} menu={{ items }} placement="bottom">
         <Button>Фильтровать</Button>
+      </Dropdown>
+      <Dropdown key={'2'} menu = {{items:item}} placement="bottom">
+        <Button>Бренд</Button>
       </Dropdown>
     </div>
   );

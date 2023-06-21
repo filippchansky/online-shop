@@ -9,14 +9,19 @@ export const backendApi = createApi({
   endpoints: (build) => ({
     searchProducts: build.query<IProducts[], string>({
       query: (id: string) => ({
-        url: `?product_id=${id}`,
+        url: `?${id}`,
       }),
     }),
     searchProductPrice: build.query<IProducts[], string>({
       query: (price: string) => ({
-        url: `?sortBy=price&sortOrder=${price}`,
+        url: `?${price}`,
       }),
     }),
+    searchProductDate: build.query<IProducts[], string>({
+      query: (date: string) => ({
+        url: `?${date}`
+      })
+    })
   }),
 });
 

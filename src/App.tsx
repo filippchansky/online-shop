@@ -18,7 +18,7 @@ function App() {
         <Route path="/" element={<MainPage />}/>
         <Route path="/catalog" element={<CatalogPage />} />
         <Route path="/catalog/:sort" element={<CatalogPage />} />
-        <Route path="/catalog/:id" element = {<AboutProduct/>}/>
+        <Route path="/catalog/product/:id" element = {<AboutProduct/>}/>
         <Route path="/testpost" element = {<TestPost/>}/>
       </Routes>
       <Footer/>

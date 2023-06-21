@@ -4,12 +4,16 @@ import "swiper/css/bundle";
 import "./mainswiper.css";
 import SwiperCard from "../swiperCard/SwiperCard";
 import { Navigation, Pagination } from "swiper";
+import { useSearchProductsQuery } from "../../store/backend/backend.api";
 
 interface MainSwiperProps {}
 
 const MainSwiper: React.FC<MainSwiperProps> = ({}) => {
 
     let sliderCount = 3
+
+    const {data} = useSearchProductsQuery('')
+    console.log(data)
 
     const [width, setWidth] = useState(window.innerWidth)
 
@@ -23,29 +27,16 @@ const MainSwiper: React.FC<MainSwiperProps> = ({}) => {
     <div className="swiper__container container">
       <Swiper 
         modules={[Navigation,Pagination]}
-        loop={true}
+        loop={true} // бесконечная прокрутка рабоает только если число слайдов > 5
         slidesPerView={sliderCount} 
         spaceBetween={0}
         navigation
         >
-        <SwiperSlide>
-          <SwiperCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SwiperCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SwiperCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SwiperCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SwiperCard />
-        </SwiperSlide>
-        <SwiperSlide>
-          <SwiperCard />
-        </SwiperSlide>
+          {data?.map(product => (
+            <SwiperSlide key={product.productId}>
+              <SwiperCard product ={product}/>
+          </SwiperSlide>
+          ))}
       </Swiper>
     </div>
   );
