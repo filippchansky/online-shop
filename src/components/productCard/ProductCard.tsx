@@ -21,9 +21,9 @@ const ProductCard:React.FC<ProductCardProps> = ({id, product}) => {
                 <img src={img} alt="" />
             </section>
             <section className={style.section__info}>
-                <p className={style.name}>{product.productName}</p>
-                <p className={style.price}>{product.price} руб</p>
-                <p className={style.description}>{product.description}</p>
+                <p className={style.name}>{product?.productName}</p>
+                <p className={style.price}>{product?.price} руб</p>
+                <p className={style.description}>{product?.description}</p>
                 <OrangeButton>
                     Купить
                 </OrangeButton>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { IProducts } from '../../models/models'
 import style from "./catalogcard.module.css"
 import img from "../../img/nike_shoes.jpg"
@@ -9,7 +9,7 @@ interface CatalogCardProps {
 }
 
 const CatalogCard:React.FC<CatalogCardProps> = ({product}) => {
-    
+
     return (
         
         <div className={style.card__container}>

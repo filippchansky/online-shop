@@ -13,8 +13,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
   const [burgerActive, setBurgerActive] = useState(false);
   const [modalActive, setModalActive] = useState(false)
 
-  const {data} = useSearchProductsQuery('')
-  console.log(data)
+  
 
   function hello () {
     alert('hello')
@@ -29,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
           </Link>
         </div>
           <ul className={style.burger__nav}>
-          <Link to={"/catalog"} onClick = {() => setBurgerActive(false)}>
+          <Link to={"/catalog/0"} onClick = {() => setBurgerActive(false)}>
               <li className={style.nav__item}>Каталог</li>
             </Link>
             <li className={style.nav__item}>Карточка</li>

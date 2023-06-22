@@ -8,7 +8,7 @@ export const backendApi = createApi({
     baseUrl: "http://localhost:8080/products",
   }),
   endpoints: (build) => ({
-    searchProducts: build.query<IProducts[], string>({
+    searchProducts: build.query<IResponse, string>({
       query: (page: string) => ({
         url: `?page_size=1`,
         params : {
@@ -29,14 +29,14 @@ export const backendApi = createApi({
       }
       },
     }),
-    searchProductDate: build.query<IProducts[], string>({
-      query: (date: string) => ({
-        url: `?${date}`
+    searchProductById: build.query<IProducts, string>({
+      query: (id: string) => ({
+        url: `/${id}`
       })
     })
   }),
 });
 
-export const { useSearchProductsQuery, useSearchProductPriceQuery } = backendApi;
+export const { useSearchProductsQuery, useSearchProductPriceQuery, useSearchProductByIdQuery } = backendApi;
 
 
