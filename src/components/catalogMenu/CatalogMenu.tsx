@@ -9,7 +9,7 @@ const items: MenuProps["items"] = [
   {
     key: "1",
     label: (
-      <Link to={`/catalog/sortBy=price&sortOrder=asc`}>
+      <Link to={`/catalog/sorted/asc`}>
         <p>По возврастанию</p>
       </Link>
     ),
@@ -17,7 +17,7 @@ const items: MenuProps["items"] = [
   {
     key: "2",
     label: (
-      <Link to={`/catalog/sortBy=price&sortOrder=desc`}>
+      <Link to={`/catalog/sorted/desc`}>
         <p>По убыванию</p>
       </Link>
     ),

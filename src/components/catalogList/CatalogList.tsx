@@ -13,72 +13,72 @@ import style from "./cataloglist.module.css";
 interface CatalogListProps {}
 
 const CatalogList: React.FC<CatalogListProps> = ({}) => {
-  const [totalPage, setTotalPage] = useState<number>()
-  const { pages } = useParams();
-  const [currentPage, setCurrentPage] = useState(pages)
-  console.log(pages, 'useParams');
+  const [totalPage, setTotalPage] = useState<number>();
+  const { pages, sort } = useParams();
+  const [currentPage, setCurrentPage] = useState("0");
+  console.log(pages, sort, "useParams");
 
-  const {
-    isLoading,
-    data,
-    isError,
-  } = useSearchProductsQuery(`${currentPage}`);
+  if (sort != undefined) {
+      console.log('сортировка')
+  }else if(pages != undefined) {
+    console.log('каталог')
+  }
+  const { isLoading, data, isError } = useSearchProductPriceQuery({
+    page: `${currentPage}`,
+    sortMethod: `${sort}`,
+  });
 
-  console.log(data, '- data')
-  console.log(isLoading, '- isloading')
-  
+  console.log(data, "- data");
+  console.log(isLoading, "- isloading");
+
   useEffect(() => {
-    setTotalPage(data?.totalPages!)
-    console.log(totalPage, 'zxc')
-  }, [data?.totalPages])
+    setTotalPage(data?.totalPages!);
+    console.log(totalPage, "zxc");
+  }, [data?.totalPages]);
 
-  let pageArr = []
-  if(data?.totalPages != undefined){
-    for (let i = 0; i < data.totalPages; i ++){  // насколько правильно данное решение не мне судить, но это работает
-      pageArr.push(i + 1)
+  let pageArr = [];
+  if (data?.totalPages != undefined) {
+    for (let i = 0; i < data.totalPages; i++) {
+      // насколько правильно данное решение не мне судить, но это работает
+      pageArr.push(String(i + 1));
     }
-    console.log(pageArr, 'pageaar')
-  }
-  
-  
-  const addPage = () => {
-    console.log(totalPage, 'qwe') // господи иисусе помоги помилуй почему у меня здесь андефаин
-    console.log(data?.totalPages) // а тут какого-то хуя число хотя я эту дату закинул в карентпэйдж в 30 строчке!!!!!!
+    console.log(pageArr, "pageaar");
   }
 
-  const changePage = (page:number) => {
-    console.log(page)
-    let pageStr = String(page-1)
-    setCurrentPage(pageStr)
-  }
+  const addPage = () => {
+    console.log(totalPage, "qwe"); // господи иисусе помоги помилуй почему у меня здесь андефаин
+    console.log(data?.totalPages); // а тут какого-то хуя число хотя я эту дату закинул в карентпэйдж в 30 строчке!!!!!!
+  };
+
+  const changePage = (page: string) => {
+    console.log(page);
+    let pageStr = Number(page) - 1;
+    setCurrentPage(String(pageStr));
+  };
 
   // console.log(Array.from({length: data?.totalPages}))
-  
 
   return (
     <div className={style.container}>
-    <div className={style.products}>
-      {data?.content?.map((product) => (
-        <Link
-          key={product.productId}
-          to={`/catalog/product/product_id=${product.productId}`}
-        >
-          <CatalogCard product={product} />
-        </Link>
-      ))}
+      <div className={style.products}>
+        {data?.content?.map((product) => (
+          <Link
+            key={product.productId}
+            to={`/catalog/product/product_id=${product.productId}`}
+          >
+            <CatalogCard product={product} />
+          </Link>
+        ))}
+      </div>
 
-      
-
-      {/* {products?.content.map(product => (
-            <h1>{product.productName}</h1>
-          ))} */}
-    </div>
-    <div className={style.pagination}>
-          {pageArr.map(page => (
-            // <Link key={page} to={`/catalog/${page}`}><Button>{page}</Button></Link>
-            <Button key={page} onClick={() => changePage(page)}>{page}</Button>
-          ))}
-    </div>
+      <div className={style.pagination}>
+        {pageArr.map((page) => (
+          // <Link key={page} to={`/catalog/${page}`}><Button>{page}</Button></Link>
+          <button className={String(Number(page)-1)==currentPage? [style.btn__pagination, style.active].join(' ') : style.btn__pagination } key={page} onClick={() => changePage(page)}>
+            {page}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

@@ -18,6 +18,18 @@
     padding: 10px;
 }
 
+.btn__pagination {
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.btn__pagination.active {
+    background-color: black;
+    color: white;
+}
+
 
 @media (max-width:1350px) {
     .products {

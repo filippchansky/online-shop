@@ -5,12 +5,16 @@ import putin from '../../img/bannerMobile.jpg'
 import Burger from "../UI/burgerMenu/Burger";
 import ModalWindow from "../UI/modalWindow/ModalWindow";
 import style from "./header.module.css";
+import { useSearchProductsQuery } from "../../store/backend/backend.api";
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = ({}) => {
   const [burgerActive, setBurgerActive] = useState(false);
   const [modalActive, setModalActive] = useState(false)
+
+  const {data} = useSearchProductsQuery('')
+  console.log(data)
 
   function hello () {
     alert('hello')

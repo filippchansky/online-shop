@@ -11,7 +11,7 @@ interface AboutProductProps {
 const AboutProduct:React.FC<AboutProductProps> = ({}) => {
     const {id} = useParams()
 
-    const {data, isLoading, isError} = useSearchProductsQuery(id!)
+    // const {data, isLoading, isError} = useSearchProductsQuery(id!)
 
     
 
