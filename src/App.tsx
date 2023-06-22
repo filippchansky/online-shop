@@ -16,7 +16,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />}/>
-        <Route path="/catalog" element={<CatalogPage />} />
+        <Route path="/catalog/:pages" element={<CatalogPage />} />
         <Route path="/catalog/:sort" element={<CatalogPage />} />
         <Route path="/catalog/product/:id" element = {<AboutProduct/>}/>
         <Route path="/testpost" element = {<TestPost/>}/>

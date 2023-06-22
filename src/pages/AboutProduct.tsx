@@ -17,14 +17,14 @@ const AboutProduct:React.FC<AboutProductProps> = ({}) => {
 
     return (
         <>
-        {data?.map(product => (
+        {/* {data?.content?.map(product => (
             <CatalogTitle key={product.productId} title={product.brand}/>
         ))}
         <div className='container'>
-            {data?.map(product => (
+            {data?.content?.map(product => (
                 <ProductCard key={product.productId} product = {product} id = {id!}/>
             ))}
-        </div>
+        </div> */}
         </>
     )
 }

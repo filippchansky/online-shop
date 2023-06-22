@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IProducts } from "../../models/models";
+import { IProducts, IResponse } from "../../models/models";
 
 export const backendApi = createApi({
   reducerPath: "backend/api",
@@ -7,9 +7,12 @@ export const backendApi = createApi({
     baseUrl: "http://localhost:8080/products",
   }),
   endpoints: (build) => ({
-    searchProducts: build.query<IProducts[], string>({
-      query: (id: string) => ({
-        url: `?${id}`,
+    searchProducts: build.query<IResponse, string>({
+      query: (page: string) => ({
+        url: `?page_size=2&page=${page}`,
+        params: ({
+          
+        })
       }),
     }),
     searchProductPrice: build.query<IProducts[], string>({

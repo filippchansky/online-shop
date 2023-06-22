@@ -12,7 +12,7 @@ const MainSwiper: React.FC<MainSwiperProps> = ({}) => {
 
     let sliderCount = 3
 
-    const {data} = useSearchProductsQuery('')
+    const {data} = useSearchProductsQuery('0')
     console.log(data)
 
     const [width, setWidth] = useState(window.innerWidth)
@@ -32,7 +32,7 @@ const MainSwiper: React.FC<MainSwiperProps> = ({}) => {
         spaceBetween={0}
         navigation
         >
-          {data?.map(product => (
+          {data?.content?.map(product => (
             <SwiperSlide key={product.productId}>
               <SwiperCard product ={product}/>
           </SwiperSlide>
