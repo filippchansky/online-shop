@@ -33,10 +33,23 @@ export const backendApi = createApi({
       query: (id: string) => ({
         url: `/${id}`
       })
-    })
+    }),
+    getProduct: build.query<IResponse, {page: string, sortBy: string, sortOrder: string}>({
+      query: (arg) => {
+        const {page, sortBy, sortOrder } = arg
+        return {
+        url: `?page_size=1`,
+        params: ({
+          page: `${page}` || '0',
+          sortBy: `${sortBy}`,
+          sortOrder: `${sortOrder}`
+        })
+      }
+      },
+    }),
   }),
 });
 
-export const { useSearchProductsQuery, useSearchProductPriceQuery, useSearchProductByIdQuery } = backendApi;
+export const { useSearchProductsQuery, useSearchProductPriceQuery, useSearchProductByIdQuery, useGetProductQuery } = backendApi;
 
 

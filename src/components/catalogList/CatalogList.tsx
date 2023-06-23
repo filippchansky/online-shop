@@ -4,6 +4,8 @@ import { Link, useParams, useSearchParams } from "react-router-dom";
 import { number } from "yargs";
 import { IProducts, IResponse } from "../../models/models";
 import {
+  useGetProductQuery,
+  useSearchProductByIdQuery,
   useSearchProductPriceQuery,
   useSearchProductsQuery,
 } from "../../store/backend/backend.api";
@@ -13,31 +15,50 @@ import style from "./cataloglist.module.css";
 interface CatalogListProps {}
 
 const CatalogList: React.FC<CatalogListProps> = ({}) => {
+  const { params } = useParams(); // подтягиваем параметр из динамичного роута
   const [response, setResponse] = useState<IResponse>(); //ответ от сервера
   const [totalPage, setTotalPage] = useState<number>(); // всего страниц (получаем от сервера)
   const [currentPage, setCurrentPage] = useState("0"); // текущая страница (по умолчанию 0)
-  const { pages, sort } = useParams(); // подтягиваем параметр из динамичного роута
-  console.log(pages, sort, "useParams");
+  const [sortMethod, setSortMethod] = useState("asc");
+  const [orderBy, setOrderBy] = useState('')
 
-  const { isLoading, data, isError } = useSearchProductPriceQuery({
-    page: `${currentPage}` || '0',
-    sortMethod: `${sort}` ,
-  }); // запрос на сортировку
+  const { data: product } = useGetProductQuery({
+    page: `${currentPage}`,
+    sortBy: `${orderBy}`,
+    sortOrder: `${sortMethod}`,
+  });
 
-  const { data: catalog } = useSearchProductsQuery(`${currentPage}` || '0'); // запрос на простой вывод товаров 
+  console.log(params, "- useparams");
+
+  let paramsArray = params?.split(" ");
+  console.log(paramsArray)
+
+  useEffect(() => {
+    for (let i = 0; i < paramsArray?.length!; i++) {
+      if(paramsArray!==undefined){
+        if (['price', 'productId'].includes(paramsArray[i])){
+          setOrderBy(paramsArray[i])
+          console.log(orderBy, 'if')
+        }else if(['asc','desc'].includes(paramsArray[i])) {
+          console.log(paramsArray[i], 'xyuxu')
+          setSortMethod(paramsArray[i])
+        }
+      }
+    }
+  }, [paramsArray])
   
   useEffect(() => {
-    if (sort !== undefined) {
-      if (data?.content !== undefined) {
-        setResponse(data);
+    if (params !== undefined) {
+      if (product?.content !== undefined) {
+        setResponse(product);
       }
-    } else if (pages !== undefined) {
-      if (catalog?.content !== undefined) {
-        setResponse(catalog);
+    } else if (params !== undefined) {
+      if (product?.content !== undefined) {
+        setResponse(product);
       }
     }
     setTotalPage(response?.totalPages!);
-  }, [data?.content, catalog?.content]); // закидываем ответ от сервера в состояние (хз как сделать по другому)
+  }, [product?.content]); // закидываем ответ от сервера в состояние (хз как сделать по другому)
 
   let pageArr = [];
   if (response?.totalPages != undefined) {
@@ -46,7 +67,7 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
       pageArr.push(String(i + 1));
     }
   }
-  console.log(catalog)
+  console.log(product);
   const changePage = (page: string) => {
     console.log(page);
     let pageStr = Number(page) - 1;
@@ -69,17 +90,17 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
       <div className={style.pagination}>
         {pageArr.map((page) => (
           // <Link key={page} to={`/catalog/${page}`}><Button>{page}</Button></Link>
-            <button
-              className={
-                String(Number(page) - 1) == currentPage
-                  ? [style.btn__pagination, style.active].join(" ")
-                  : style.btn__pagination
-              }
-              key={page}
-              onClick={() => changePage(page)}
-            >
-              {page}
-            </button>
+          <button
+            className={
+              String(Number(page) - 1) == currentPage
+                ? [style.btn__pagination, style.active].join(" ")
+                : style.btn__pagination
+            }
+            key={page}
+            onClick={() => changePage(page)}
+          >
+            {page}
+          </button>
         ))}
       </div>
     </div>

@@ -51,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
         </div>
         <nav>
           <ul className={style.header__nav}>
-            <Link to={"/catalog/0"}>
+            <Link to={"/catalog/productId"}>
               <li className={style.nav__item}>Каталог</li>
             </Link>
             <li className={style.nav__item}>Карточка</li>
