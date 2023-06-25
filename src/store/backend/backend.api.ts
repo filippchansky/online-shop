@@ -8,14 +8,13 @@ export const backendApi = createApi({
     baseUrl: "http://localhost:8080/products",
   }),
   endpoints: (build) => ({
-    searchProducts: build.query<IResponse, string>({
-      query: (page: string) => ({
-        url: `?page_size=1`,
-        params : {
-          page: `${page}` || '0'
+    searchProducts: build.query<IResponse, {page: string, params: string}>({
+      query: (arg) => {
+        const {page, params} = arg
+        return {
+          url: `?page_size=1&page=${page}&${params}`,
         }
-      }),
-    }),
+      }}),
     searchProductPrice: build.query<IResponse, {page: string, sortMethod: string}>({
       query: (arg) => {
         const {page, sortMethod } = arg

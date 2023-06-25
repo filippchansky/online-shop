@@ -1,6 +1,12 @@
 import { Button } from "antd/es/radio";
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { number } from "yargs";
 import { IProducts, IResponse } from "../../models/models";
 import {
@@ -15,42 +21,53 @@ import style from "./cataloglist.module.css";
 interface CatalogListProps {}
 
 const CatalogList: React.FC<CatalogListProps> = ({}) => {
-  const { params } = useParams(); // подтягиваем параметр из динамичного роута
+  const { params, sort } = useParams(); // подтягиваем параметр из динамичного роута
   const [response, setResponse] = useState<IResponse>(); //ответ от сервера
   const [totalPage, setTotalPage] = useState<number>(); // всего страниц (получаем от сервера)
   const [currentPage, setCurrentPage] = useState("0"); // текущая страница (по умолчанию 0)
   const [sortMethod, setSortMethod] = useState("asc");
-  const [orderBy, setOrderBy] = useState('')
+  const [orderBy, setOrderBy] = useState("productId");
 
-  const { data: product } = useGetProductQuery({
+  console.log(useParams());
+
+  // const { data: product } = useGetProductQuery({
+  //   page: `${currentPage}`,
+  //   sortBy: `${orderBy}`,
+  //   sortOrder: `${sortMethod}`,
+  // });
+
+  const {data: product} = useSearchProductsQuery({
     page: `${currentPage}`,
-    sortBy: `${orderBy}`,
-    sortOrder: `${sortMethod}`,
-  });
+    params: `${params}`
+  })
 
   console.log(params, "- useparams");
 
-  let paramsArray = params?.split(" ");
-  console.log(paramsArray)
+  // let paramsArray = params?.split(" ");
+  // console.log(paramsArray)
 
-  useEffect(() => {
-    for (let i = 0; i < paramsArray?.length!; i++) {
-      if(paramsArray!==undefined){
-        if (['price', 'productId'].includes(paramsArray[i])){
-          setOrderBy(paramsArray[i])
-          console.log(orderBy, 'if')
-        }else if(['asc','desc'].includes(paramsArray[i])) {
-          console.log(paramsArray[i], 'xyuxu')
-          setSortMethod(paramsArray[i])
-        }
-      }
-    }
-  }, [paramsArray])
-  
+  // useEffect(() => {
+  //   for (let i = 0; i < paramsArray?.length!; i++) {
+  //     if(paramsArray!==undefined){
+  //       if (['price', 'productId'].includes(paramsArray[i])){
+  //         setOrderBy(paramsArray[i])
+  //         console.log(orderBy, 'if')
+  //       }else if(['asc','desc'].includes(paramsArray[i])) {
+  //         console.log(paramsArray[i], 'xyuxu')
+  //         setSortMethod(paramsArray[i])
+  //       }
+  //     }
+  //   }
+  // }, [paramsArray])
+
   useEffect(() => {
     if (params !== undefined) {
       if (product?.content !== undefined) {
         setResponse(product);
+        setOrderBy(params!);
+        if (sort != undefined) {
+          setSortMethod(sort!);
+        }
       }
     } else if (params !== undefined) {
       if (product?.content !== undefined) {

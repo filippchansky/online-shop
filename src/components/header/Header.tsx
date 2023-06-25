@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
           </Link>
         </div>
           <ul className={style.burger__nav}>
-          <Link to={"/catalog/0"} onClick = {() => setBurgerActive(false)}>
+          <Link to={"/catalog/productId"} onClick = {() => setBurgerActive(false)}>
               <li className={style.nav__item}>Каталог</li>
             </Link>
             <li className={style.nav__item}>Карточка</li>
@@ -51,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
         </div>
         <nav>
           <ul className={style.header__nav}>
-            <Link to={"/catalog/productId"}>
+            <Link to={"/catalog/products"}>
               <li className={style.nav__item}>Каталог</li>
             </Link>
             <li className={style.nav__item}>Карточка</li>
