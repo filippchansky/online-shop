@@ -46,9 +46,14 @@ export const backendApi = createApi({
       }
       },
     }),
+    getProductsBrand: build.query<string[], string>({
+      query: () => ({
+        url: `/brands`
+      })
+    }),
   }),
 });
 
-export const { useSearchProductsQuery, useSearchProductPriceQuery, useSearchProductByIdQuery, useGetProductQuery } = backendApi;
+export const { useSearchProductsQuery, useSearchProductPriceQuery, useSearchProductByIdQuery, useGetProductQuery, useGetProductsBrandQuery } = backendApi;
 
 

@@ -20,14 +20,19 @@
 
 .btn__pagination {
     padding: 5px 10px;
-    border: 1px solid black;
-    border-radius: 10px;
-    transition: .3s;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 5px;
+    transition: .5s;
+}
+
+.btn__pagination:hover {
+    border: 1px solid blue;
+    color: rgb(60, 60, 255);
 }
 
 .btn__pagination.active {
-    background-color: black;
-    color: white;
+    border: 1px solid blue;
+    color: blue;
 }
 
 

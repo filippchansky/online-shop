@@ -1,25 +1,39 @@
 import { Button, Dropdown, MenuProps } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useGetProductsBrandQuery } from "../../store/backend/backend.api";
 import OrangeButton from "../UI/OrangeButton/OrangeButton";
 import style from "./catalogmenu.module.css";
 
 interface CatalogMenuProps {}
 
 const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
+  const {data: brands} = useGetProductsBrandQuery('')
   const [sortMethod, setSortMethod] = useState("Цена");
   const [brandMethod, setBrandMethod] = useState("Бренд");
   const [priceParams, setPriceParams] = useState("");
   const [brandParams, setBrandParams] = useState("");
+  // const [brandList, setBrandList] = useState<string[]>([])
+  const brandList:string[] = ['Все бренды']
 
   const sortItem = ["Сначала дешевые", "Сначала дорогие"];
-  const brandList = ["Все бренды", "Adidas", "Nike"];
+  
+  brands?.map(elem => {
+    brandList.push(elem)
+  })
+  // useEffect(() => {
+  //   for (let i = 0; i < brands?.length!; i ++){
+  //     if(brands !== undefined) {
+  //       brandList.push(brands[i])
+  //     }
+  //   }
+  // }, [])
 
   const priceItem: MenuProps["items"] = sortItem.map((elem, index) => ({
     key: `${index}`,
     label: <p onClick={() => clickSort(elem)}>{elem}</p>,
   }));
-  const brandItem: MenuProps["items"] = brandList.map((elem, index) => ({
+  const brandItem: MenuProps["items"] = brandList?.map((elem, index) => ({
     key: `${index}`,
     label: <p onClick={() => clickBrand(elem)}>{elem}</p>,
   }));

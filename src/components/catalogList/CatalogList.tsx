@@ -25,51 +25,18 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
   const [response, setResponse] = useState<IResponse>(); //ответ от сервера
   const [totalPage, setTotalPage] = useState<number>(); // всего страниц (получаем от сервера)
   const [currentPage, setCurrentPage] = useState("0"); // текущая страница (по умолчанию 0)
-  const [sortMethod, setSortMethod] = useState("asc");
-  const [orderBy, setOrderBy] = useState("productId");
-
-  console.log(useParams());
-
-  // const { data: product } = useGetProductQuery({
-  //   page: `${currentPage}`,
-  //   sortBy: `${orderBy}`,
-  //   sortOrder: `${sortMethod}`,
-  // });
 
   const {data: product} = useSearchProductsQuery({
     page: `${currentPage}`,
     params: `${params}`
   })
 
-  console.log(params, "- useparams");
-
-  // let paramsArray = params?.split(" ");
-  // console.log(paramsArray)
-
-  // useEffect(() => {
-  //   for (let i = 0; i < paramsArray?.length!; i++) {
-  //     if(paramsArray!==undefined){
-  //       if (['price', 'productId'].includes(paramsArray[i])){
-  //         setOrderBy(paramsArray[i])
-  //         console.log(orderBy, 'if')
-  //       }else if(['asc','desc'].includes(paramsArray[i])) {
-  //         console.log(paramsArray[i], 'xyuxu')
-  //         setSortMethod(paramsArray[i])
-  //       }
-  //     }
-  //   }
-  // }, [paramsArray])
+  useEffect(()=> {
+    setCurrentPage('0')
+  }, [params])
 
   useEffect(() => {
     if (params !== undefined) {
-      if (product?.content !== undefined) {
-        setResponse(product);
-        setOrderBy(params!);
-        if (sort != undefined) {
-          setSortMethod(sort!);
-        }
-      }
-    } else if (params !== undefined) {
       if (product?.content !== undefined) {
         setResponse(product);
       }
