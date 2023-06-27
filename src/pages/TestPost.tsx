@@ -1,6 +1,8 @@
 import { Button, Dropdown, MenuProps } from "antd";
+import Input from "antd/es/input/Input";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import AddProductForm from "../components/addProductForm/AddProductForm";
 import OrangeButton from "../components/UI/OrangeButton/OrangeButton";
 import { IProducts } from "../models/models";
 import { useSearchProductsQuery } from "../store/backend/backend.api";
@@ -51,7 +53,7 @@ const TestPost: React.FC<TestPostProps> = ({}) => {
   ];
 
   return (
-    <div>
+    <div className="container">
       <form action="">
         <input type="file" onChange={handleChange} />
         <button onClick={submitPost}>отправить</button>
@@ -62,6 +64,9 @@ const TestPost: React.FC<TestPostProps> = ({}) => {
       <Dropdown menu={{ items }} placement="bottom">
         <Button>bottom</Button>
       </Dropdown>
+      
+      <AddProductForm/>
+      
     </div>
   );
 };

@@ -13,13 +13,13 @@ export interface IResponse {
 }
 
 export interface IProducts {
-  productId: number;
+  productId?: number;
   productName: string;
   description: string;
   price: number;
   brand: string;
   category: string;
-  createDate: number;
+  createDate?: number;
 }
 
 export interface Pageable {

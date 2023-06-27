@@ -5,21 +5,21 @@ import { IProducts, IResponse } from "../../models/models";
 export const backendApi = createApi({
   reducerPath: "backend/api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080/products",
+    baseUrl: "http://localhost:8080/",
   }),
   endpoints: (build) => ({
     searchProducts: build.query<IResponse, {page: string, params: string}>({
       query: (arg) => {
         const {page, params} = arg
         return {
-          url: `?page_size=1&page=${page}&${params}`,
+          url: `products?page_size=1&page=${page}&${params}`,
         }
       }}),
     searchProductPrice: build.query<IResponse, {page: string, sortMethod: string}>({
       query: (arg) => {
         const {page, sortMethod } = arg
         return {
-        url: `?page_size=1`,
+        url: `products?page_size=1`,
         params: ({
           page: `${page}` || '0',
           sortBy: 'price',
@@ -30,14 +30,14 @@ export const backendApi = createApi({
     }),
     searchProductById: build.query<IProducts, string>({
       query: (id: string) => ({
-        url: `/${id}`
+        url: `products/${id}`
       })
     }),
     getProduct: build.query<IResponse, {page: string, sortBy: string, sortOrder: string}>({
       query: (arg) => {
         const {page, sortBy, sortOrder } = arg
         return {
-        url: `?page_size=1`,
+        url: `products?page_size=1`,
         params: ({
           page: `${page}` || '0',
           sortBy: `${sortBy}`,
@@ -48,12 +48,19 @@ export const backendApi = createApi({
     }),
     getProductsBrand: build.query<string[], string>({
       query: () => ({
-        url: `/brands`
+        url: `products/brands`
       })
     }),
+    addProduct: build.mutation<IProducts, IProducts>({
+      query: (product) => ({
+        url: 'product',
+        method: 'POST',
+        body: product
+      })
+    })
   }),
 });
 
-export const { useSearchProductsQuery, useSearchProductPriceQuery, useSearchProductByIdQuery, useGetProductQuery, useGetProductsBrandQuery } = backendApi;
+export const { useSearchProductsQuery, useSearchProductPriceQuery, useSearchProductByIdQuery, useGetProductQuery, useGetProductsBrandQuery, useAddProductMutation } = backendApi;
 
 

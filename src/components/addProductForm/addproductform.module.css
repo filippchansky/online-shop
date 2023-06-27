@@ -1,0 +1,19 @@
+.form__container {
+  margin-top: 200px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 350px;
+  padding: 10px;
+}
+
+.input {
+  max-width: 200px;
+}
+
+.btn {
+  max-width: 100px;
+}
