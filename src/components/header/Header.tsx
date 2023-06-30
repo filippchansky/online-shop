@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({}) => {
           </Link>
         </div>
           <ul className={style.burger__nav}>
-          <Link to={"/catalog/productId"} onClick = {() => setBurgerActive(false)}>
+          <Link to={"/catalog/products"} onClick = {() => setBurgerActive(false)}>
               <li className={style.nav__item}>Каталог</li>
             </Link>
             <li className={style.nav__item}>Карточка</li>

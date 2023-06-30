@@ -52,10 +52,12 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
     }
   }
   console.log(product);
+
   const changePage = (page: string) => {
     console.log(page);
     let pageStr = Number(page) - 1;
     setCurrentPage(String(pageStr));
+    window.scrollTo(0,0)
   };
 
   return (

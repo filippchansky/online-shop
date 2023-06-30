@@ -21,13 +21,6 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
   brands?.map(elem => {
     brandList.push(elem)
   })
-  // useEffect(() => {
-  //   for (let i = 0; i < brands?.length!; i ++){
-  //     if(brands !== undefined) {
-  //       brandList.push(brands[i])
-  //     }
-  //   }
-  // }, [])
 
   const priceItem: MenuProps["items"] = sortItem.map((elem, index) => ({
     key: `${index}`,
@@ -50,7 +43,7 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
   const clickBrand = (value: string) => {
     setBrandMethod(value);
     if (value !== "Все бренды") {
-      setBrandParams(`&brand=${value}`);
+      setBrandParams(`brand=${value}`);
     }else setBrandParams('')
   };
   console.log(priceParams);
@@ -61,6 +54,7 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
     <div className={style.menu__container}>
       <Dropdown
         className={style.price}
+        trigger={['click']}
         key={"1"}
         menu={{ items: priceItem }}
         placement="bottom"
@@ -69,6 +63,7 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
       </Dropdown>
       <Dropdown
         className={style.price}
+        trigger={['click']}
         key={"2"}
         menu={{ items: brandItem }}
         placement="bottom"
