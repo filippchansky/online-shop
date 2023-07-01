@@ -57,7 +57,7 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
     console.log(page);
     let pageStr = Number(page) - 1;
     setCurrentPage(String(pageStr));
-    window.scrollTo(0,0)
+    // window.scrollTo(0,0)
   };
 
   return (
