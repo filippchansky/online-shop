@@ -16,10 +16,12 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
   const [brandParams, setBrandParams] = useState("");
   const [brandArr, setBrandArr] = useState([]);
   const [checked, setChecked] = useState<boolean>();
+
+  const [checkedList, setCheckedList] = useState<CheckboxValueType[]>();
+  const [indeterminate, setIndeterminate] = useState(true);
+  const [checkAll, setCheckAll] = useState(false);
   // const [brandList, setBrandList] = useState<string[]>([])
-  const handleOpenChange = (flag: boolean) => {
-    setOpen(flag);
-  };
+
   const brandList: string[] = [];
 
   const sortItem = ["Сначала дешевые", "Сначала дорогие"];
@@ -31,7 +33,7 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
   const changeBrands = (checkedValues: CheckboxValueType[]) => {
     if (checkedValues.length == 0) {
       setChecked(false);
-      setBrandParams('')
+      setBrandParams("");
     } else if (checkedValues.length > 0) {
       setChecked(true);
       console.log("checked = ", checkedValues);
@@ -73,8 +75,20 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
     setBrandArr([]);
   };
 
+  const removeFilter = () => {
+    setPriceParams("");
+    setSortMethod("По цене");
+    setChecked(false);
+    setBrandParams("");
+  };
+
   return (
     <div className={style.menu__container}>
+      <Link to={"/catalog/products"}>
+        <Button type="text" danger onClick={removeFilter}>
+          Сбросить фильтры
+        </Button>
+      </Link>
       <Dropdown
         className={style.price}
         trigger={["click"]}

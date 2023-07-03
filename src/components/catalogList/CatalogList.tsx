@@ -1,3 +1,4 @@
+import { Spin } from "antd";
 import { Button } from "antd/es/radio";
 import React, { useEffect, useState } from "react";
 import {
@@ -26,14 +27,14 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
   const [totalPage, setTotalPage] = useState<number>(); // всего страниц (получаем от сервера)
   const [currentPage, setCurrentPage] = useState("0"); // текущая страница (по умолчанию 0)
 
-  const {data: product} = useSearchProductsQuery({
+  const {data: product, isLoading} = useSearchProductsQuery({
     page: `${currentPage}`,
     params: `${params}`
   })
 
   useEffect(()=> {
     setCurrentPage('0')
-  }, [params])
+  }, [params]) // при изменении query параметров меняет текущую страницу на первую
 
   useEffect(() => {
     if (params !== undefined) {
@@ -59,6 +60,10 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
     setCurrentPage(String(pageStr));
     // window.scrollTo(0,0)
   };
+
+  if(isLoading){
+    return <Spin tip="Loading" size="large"/>
+  }
 
   return (
     <div className={style.container}>

@@ -12,7 +12,7 @@ export const backendApi = createApi({
       query: (arg) => {
         const {page, params} = arg
         return {
-          url: `products?page_size=1&page=${page}&${params}`,
+          url: `products?page_size=3&page=${page}&${params}`,
         }
       }}),
     searchProductPrice: build.query<IResponse, {page: string, sortMethod: string}>({
