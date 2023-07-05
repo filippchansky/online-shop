@@ -39,6 +39,9 @@
 .checkbox__brands {
   max-height: 300px;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 

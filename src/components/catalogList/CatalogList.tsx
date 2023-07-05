@@ -27,14 +27,14 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
   const [totalPage, setTotalPage] = useState<number>(); // всего страниц (получаем от сервера)
   const [currentPage, setCurrentPage] = useState("0"); // текущая страница (по умолчанию 0)
 
-  const {data: product, isLoading} = useSearchProductsQuery({
+  const { data: product, isLoading } = useSearchProductsQuery({
     page: `${currentPage}`,
-    params: `${params}`
-  })
+    params: `${params}`,
+  });
 
-  useEffect(()=> {
-    setCurrentPage('0')
-  }, [params]) // при изменении query параметров меняет текущую страницу на первую
+  useEffect(() => {
+    setCurrentPage("0");
+  }, [params]); // при изменении query параметров меняет текущую страницу на первую
 
   useEffect(() => {
     if (params !== undefined) {
@@ -61,8 +61,12 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
     // window.scrollTo(0,0)
   };
 
-  if(isLoading){
-    return <Spin tip="Loading" size="large"/>
+  if (isLoading) {
+    return (
+      <div className={style.spin}>
+        <Spin tip="Loading" size="large" />
+      </div>
+    );
   }
 
   return (

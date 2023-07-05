@@ -1,4 +1,5 @@
 import { Button, Checkbox, Dropdown, MenuProps, Result } from "antd";
+import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -16,21 +17,36 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
   const [brandParams, setBrandParams] = useState("");
   const [brandArr, setBrandArr] = useState([]);
   const [checked, setChecked] = useState<boolean>();
-
   const [checkedList, setCheckedList] = useState<CheckboxValueType[]>();
   const [indeterminate, setIndeterminate] = useState(true);
   const [checkAll, setCheckAll] = useState(false);
   // const [brandList, setBrandList] = useState<string[]>([])
 
-  const brandList: string[] = [];
+  const onCheckAllChange = (e: CheckboxChangeEvent) => {
+    if (e.target.checked) {
+      setChecked(true);
+      setBrandParams(`&brand=${brandList.join(",")}`);
+    } else if (e.target.checked === false) {
+      setChecked(false);
+    }
+    setCheckedList(e.target.checked ? brandList : []);
+    setIndeterminate(false);
+    setCheckAll(e.target.checked);
+  };
 
   const sortItem = ["Сначала дешевые", "Сначала дорогие"];
+  const brandList: string[] = [];
 
   brands?.map((elem) => {
     brandList.push(elem);
   });
 
   const changeBrands = (checkedValues: CheckboxValueType[]) => {
+    setCheckedList(checkedValues);
+    setIndeterminate(
+      !!checkedValues.length && checkedValues.length < brandList.length
+    );
+    setCheckAll(checkedValues.length === brandList.length);
     if (checkedValues.length == 0) {
       setChecked(false);
       setBrandParams("");
@@ -45,10 +61,6 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
     key: `${index}`,
     label: <p onClick={() => clickSort(elem)}>{elem}</p>,
   }));
-  // const brandItem: MenuProps["items"] = brandList?.map((elem, index) => ({
-  //   key: `${index}`,
-  //   label: <Checkbox.Group options={[elem]} onChange={changeBrands}/>
-  // }));
 
   const clickSort = (value: string) => {
     setSortMethod(value);
@@ -58,21 +70,8 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
       setPriceParams("sortBy=price&sortOrder=desc");
     }
   };
-
-  // let res: string[] = [];
-  // const clickBrand = (value: string) => {
-  //   console.log(value)
-  //   setBrandMethod(value);
-  //   if (value !== "Все бренды") {
-  //     brandArr.push(value);
-  //     setBrandParams(`&brand=${brandArr.join(",")}`);
-  //   } else setBrandParams("");
-  // };
-  // console.log(priceParams);
-  // console.log(sortMethod);
-  // console.log(brandMethod);
   const cleanParams = () => {
-    setBrandArr([]);
+    // setBrandArr([]);
   };
 
   const removeFilter = () => {
@@ -80,6 +79,8 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
     setSortMethod("По цене");
     setChecked(false);
     setBrandParams("");
+    setCheckedList([]);
+    setCheckAll(false);
   };
 
   return (
@@ -99,11 +100,20 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
         <Button>{sortMethod}</Button>
       </Dropdown>
       <div className={style.checkbox__brands}>
+        <Checkbox
+          indeterminate={indeterminate}
+          onChange={onCheckAllChange}
+          checked={checkAll}
+        >
+          Все бренды
+        </Checkbox>
         <Checkbox.Group
           style={{ flexDirection: "column", gap: "10px" }}
           options={brandList}
           onChange={changeBrands}
-        />
+          value={checkedList}
+          defaultValue={checkedList}
+        ></Checkbox.Group>
       </div>
       {/* {brandList?.map(brand => (
         <Checkbox>{brand}</Checkbox>

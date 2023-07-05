@@ -1,3 +1,4 @@
+import { Spin } from 'antd';
 import React from 'react'
 import { useParams } from 'react-router-dom';
 import CatalogTitle from '../components/catalogTitle/CatalogTitle';
@@ -15,6 +16,9 @@ const AboutProduct:React.FC<AboutProductProps> = ({}) => {
 
     const {data, isLoading, isError} = useSearchProductByIdQuery(id!)
     console.log(data, 'qweqwe')
+    if(isLoading){
+        return <Spin tip="Loading" size="large"/>
+      }
     
 
     return (
