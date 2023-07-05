@@ -5,7 +5,7 @@ import { IProducts, IResponse } from "../../models/models";
 export const backendApi = createApi({
   reducerPath: "backend/api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8080/",
+    baseUrl: "http://159.89.20.124:8080/",
   }),
   endpoints: (build) => ({
     searchProducts: build.query<IResponse, {page: string, params: string}>({
