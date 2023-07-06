@@ -1,87 +1,49 @@
-import { Button, Checkbox, Dropdown, MenuProps, Result } from "antd";
+import { Button, Checkbox } from "antd";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useGetProductsBrandQuery, useGetProductsSizeQuery } from "../../store/backend/backend.api";
+import {
+  useGetProductsBrandQuery,
+  useGetProductsSizeQuery,
+} from "../../store/backend/backend.api";
+import SortBrand from "../SortBrand/SortBrand";
+import SortPrice from "../SortPrice/SortPrice";
+import SortSize from "../SortSize/SortSize";
 import style from "./catalogmenu.module.css";
 
 interface CatalogMenuProps {}
 
 const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
   const { data: brands } = useGetProductsBrandQuery("");
-  const {data:sizes} = useGetProductsSizeQuery('')
+  const { data: sizes } = useGetProductsSizeQuery("");
   const [open, setOpen] = useState(false);
   const [sortMethod, setSortMethod] = useState("По цене");
   const [brandMethod, setBrandMethod] = useState("Бренд");
   const [priceParams, setPriceParams] = useState("");
   const [brandParams, setBrandParams] = useState("");
+  const [sizeParams, setSizeParams] = useState("");
   const brandList: string[] = [];
-  const sizeList:string[] = []
+  const sizeList: string[] = [];
   const [brandArr, setBrandArr] = useState([]);
   const [checked, setChecked] = useState<boolean>();
   const [checkedList, setCheckedList] = useState<CheckboxValueType[]>();
+  const [checkedListSize, setCheckedListSize] = useState<CheckboxValueType[]>();
   const [indeterminate, setIndeterminate] = useState(true);
   const [checkAll, setCheckAll] = useState(false);
   // const [brandList, setBrandList] = useState<string[]>([])
-  
 
-  const onCheckAllChange = (e: CheckboxChangeEvent) => {
-    if (e.target.checked) {
-      setChecked(true);
-      setBrandParams(`&brand=${brandList.join(",")}`);
-    } else if (e.target.checked === false) {
-      setChecked(false);
-    }
-    setCheckedList(e.target.checked ? brandList : []);
-    setIndeterminate(false);
-    setCheckAll(e.target.checked);
-  };
-
-  const sortItem = ["Сначала дешевые", "Сначала дорогие"];
-  
-  sizes?.map(elem => {
-    sizeList.push(elem)
-  })
+  sizes?.map((elem) => {
+    sizeList.push(elem);
+  });
   brands?.map((elem) => {
     brandList.push(elem);
   });
 
-  console.log(sizeList, 'sizes')
+  console.log(sizeParams, " - sizeParams");
+  console.log(brandParams, " - brandParams");
+  console.log(priceParams, " - priceParams");
 
-  const changeBrands = (checkedValues: CheckboxValueType[]) => {
-    setCheckedList(checkedValues);
-    setIndeterminate(
-      !!checkedValues.length && checkedValues.length < brandList.length
-    );
-    setCheckAll(checkedValues.length === brandList.length);
-    if (checkedValues.length == 0) {
-      setChecked(false);
-      setBrandParams("");
-    } else if (checkedValues.length > 0) {
-      setChecked(true);
-      console.log("checked = ", checkedValues);
-      setBrandParams(`&brand=${checkedValues.join(",")}`);
-    }
-  };
-
-  const changeSize = (checkedValues: CheckboxValueType[]) => {
-    console.log(checkedValues)
-  }
-
-  const priceItem: MenuProps["items"] = sortItem.map((elem, index) => ({
-    key: `${index}`,
-    label: <p onClick={() => clickSort(elem)}>{elem}</p>,
-  }));
-
-  const clickSort = (value: string) => {
-    setSortMethod(value);
-    if (value === "Сначала дешевые") {
-      setPriceParams("sortBy=price&sortOrder=asc");
-    } else if (value === "Сначала дорогие") {
-      setPriceParams("sortBy=price&sortOrder=desc");
-    }
-  };
   const cleanParams = () => {
     // setBrandArr([]);
   };
@@ -93,6 +55,7 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
     setBrandParams("");
     setCheckedList([]);
     setCheckAll(false);
+    setCheckedListSize([]);
   };
 
   return (
@@ -102,49 +65,38 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
           Сбросить фильтры
         </Button>
       </Link>
-      <Dropdown
-        className={style.price}
-        trigger={["click"]}
-        key={"1"}
-        menu={{ items: priceItem }}
-        placement="bottom"
-      >
-        <Button>{sortMethod}</Button>
-      </Dropdown>
-      <Checkbox
-          indeterminate={indeterminate}
-          onChange={onCheckAllChange}
-          checked={checkAll}
-        >
-          Все бренды
-        </Checkbox>
-      <div className={style.checkbox__brands}>
-        
-        <Checkbox.Group
-          style={{ flexDirection: "column", gap: "10px" }}
-          options={brandList}
-          onChange={changeBrands}
-          value={checkedList}
-          defaultValue={checkedList}
-        ></Checkbox.Group>
-      </div>
-      <div className={style.checkbox__brands}>
-        <Checkbox.Group
-          style={{ flexDirection: "column", gap: "10px" }}
-          options={sizeList}
-          onChange={changeSize}
-          value={checkedList}
-          defaultValue={checkedList}
-        ></Checkbox.Group>
-      </div>
+      <SortPrice
+        setSortMethod={setSortMethod}
+        setPriceParams={setPriceParams}
+        sortMethod={sortMethod}
+      />
+      <SortBrand
+        setCheckedList={setCheckedList}
+        setIndeterminate={setIndeterminate}
+        setCheckAll={setCheckAll}
+        brandList={brandList}
+        setChecked={setChecked}
+        setBrandParams={setBrandParams}
+        indeterminate={indeterminate}
+        checkAll={checkAll}
+        checkedList={checkedList}
+      />
+      <SortSize
+        sizeList={sizeList}
+        setCheckedListSize={setCheckedListSize}
+        checkedListSize={checkedListSize}
+        setSizeParams={setSizeParams}
+        brandParams ={brandParams}
+        sizeParams={sizeParams}
+      />
       {/* {brandList?.map(brand => (
         <Checkbox>{brand}</Checkbox>
       ))} */}
-      <Link to={`/catalog/${priceParams}${brandParams}`}>
+      <Link to={`/catalog/${priceParams}${brandParams}${sizeParams}`}>
         <h1
           onClick={cleanParams}
           className={
-            checked || priceParams
+            checked || priceParams || sizeParams
               ? [style.btn, style.active].join(" ")
               : style.btn
           }
