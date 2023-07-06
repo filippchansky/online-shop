@@ -15,18 +15,16 @@ export const backendApi = createApi({
           url: `products?page_size=3&page=${page}&${params}`,
         }
       }}),
-    searchProductPrice: build.query<IResponse, {page: string, sortMethod: string}>({
-      query: (arg) => {
-        const {page, sortMethod } = arg
-        return {
-        url: `products?page_size=1`,
-        params: ({
-          page: `${page}` || '0',
-          sortBy: 'price',
-          sortOrder: `${sortMethod}`
-        })
-      }
-      },
+    getProductsSize: build.query<string[], string>({
+      query: () => ({
+        url: `products/sizes`
+      })
+      // query: (arg) => {
+      //   const {page, sortMethod } = arg
+      //   return {
+      //   url: `products/sizes`,
+      // }
+      // },
     }),
     searchProductById: build.query<IProducts, string>({
       query: (id: string) => ({
@@ -61,6 +59,6 @@ export const backendApi = createApi({
   }),
 });
 
-export const { useSearchProductsQuery, useSearchProductPriceQuery, useSearchProductByIdQuery, useGetProductQuery, useGetProductsBrandQuery, useAddProductMutation } = backendApi;
+export const { useSearchProductsQuery, useSearchProductByIdQuery, useGetProductQuery, useGetProductsBrandQuery, useAddProductMutation, useGetProductsSizeQuery } = backendApi;
 
 

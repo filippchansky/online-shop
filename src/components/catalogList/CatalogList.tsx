@@ -13,7 +13,6 @@ import { IProducts, IResponse } from "../../models/models";
 import {
   useGetProductQuery,
   useSearchProductByIdQuery,
-  useSearchProductPriceQuery,
   useSearchProductsQuery,
 } from "../../store/backend/backend.api";
 import CatalogCard from "../catalogCard/CatalogCard";
@@ -22,18 +21,25 @@ import style from "./cataloglist.module.css";
 interface CatalogListProps {}
 
 const CatalogList: React.FC<CatalogListProps> = ({}) => {
+  let page = localStorage.getItem('page')
   const { params, sort } = useParams(); // подтягиваем параметр из динамичного роута
   const [response, setResponse] = useState<IResponse>(); //ответ от сервера
   const [totalPage, setTotalPage] = useState<number>(); // всего страниц (получаем от сервера)
-  const [currentPage, setCurrentPage] = useState("0"); // текущая страница (по умолчанию 0)
-
-  const { data: product, isLoading } = useSearchProductsQuery({
+  const [currentPage, setCurrentPage] = useState(JSON.parse(page!) ||"0"); // текущая страница (по умолчанию 0)
+  console.log(params, 'params')
+  
+  console.log(typeof(JSON.parse(page!)), 'page')
+  const { data: product, isLoading, isError } = useSearchProductsQuery({
     page: `${currentPage}`,
     params: `${params}`,
   });
 
   useEffect(() => {
-    setCurrentPage("0");
+    if(params?.length!>8) {
+      setCurrentPage("0");
+    } else {
+      setCurrentPage(JSON.parse(page!));
+    }
   }, [params]); // при изменении query параметров меняет текущую страницу на первую
 
   useEffect(() => {
@@ -58,6 +64,7 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
     console.log(page);
     let pageStr = Number(page) - 1;
     setCurrentPage(String(pageStr));
+    localStorage.setItem('page', JSON.stringify(String(pageStr)))
     // window.scrollTo(0,0)
   };
 
@@ -67,6 +74,10 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
         <Spin tip="Loading" size="large" />
       </div>
     );
+  }
+
+  if(isError) {
+    return <h1>Ошибка</h1>
   }
 
   return (

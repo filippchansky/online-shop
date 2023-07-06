@@ -3,24 +3,28 @@ import { CheckboxChangeEvent } from "antd/es/checkbox";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useGetProductsBrandQuery } from "../../store/backend/backend.api";
+import { useGetProductsBrandQuery, useGetProductsSizeQuery } from "../../store/backend/backend.api";
 import style from "./catalogmenu.module.css";
 
 interface CatalogMenuProps {}
 
 const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
   const { data: brands } = useGetProductsBrandQuery("");
+  const {data:sizes} = useGetProductsSizeQuery('')
   const [open, setOpen] = useState(false);
   const [sortMethod, setSortMethod] = useState("По цене");
   const [brandMethod, setBrandMethod] = useState("Бренд");
   const [priceParams, setPriceParams] = useState("");
   const [brandParams, setBrandParams] = useState("");
+  const brandList: string[] = [];
+  const sizeList:string[] = []
   const [brandArr, setBrandArr] = useState([]);
   const [checked, setChecked] = useState<boolean>();
   const [checkedList, setCheckedList] = useState<CheckboxValueType[]>();
   const [indeterminate, setIndeterminate] = useState(true);
   const [checkAll, setCheckAll] = useState(false);
   // const [brandList, setBrandList] = useState<string[]>([])
+  
 
   const onCheckAllChange = (e: CheckboxChangeEvent) => {
     if (e.target.checked) {
@@ -35,11 +39,15 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
   };
 
   const sortItem = ["Сначала дешевые", "Сначала дорогие"];
-  const brandList: string[] = [];
-
+  
+  sizes?.map(elem => {
+    sizeList.push(elem)
+  })
   brands?.map((elem) => {
     brandList.push(elem);
   });
+
+  console.log(sizeList, 'sizes')
 
   const changeBrands = (checkedValues: CheckboxValueType[]) => {
     setCheckedList(checkedValues);
@@ -56,6 +64,10 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
       setBrandParams(`&brand=${checkedValues.join(",")}`);
     }
   };
+
+  const changeSize = (checkedValues: CheckboxValueType[]) => {
+    console.log(checkedValues)
+  }
 
   const priceItem: MenuProps["items"] = sortItem.map((elem, index) => ({
     key: `${index}`,
@@ -99,18 +111,28 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
       >
         <Button>{sortMethod}</Button>
       </Dropdown>
-      <div className={style.checkbox__brands}>
-        <Checkbox
+      <Checkbox
           indeterminate={indeterminate}
           onChange={onCheckAllChange}
           checked={checkAll}
         >
           Все бренды
         </Checkbox>
+      <div className={style.checkbox__brands}>
+        
         <Checkbox.Group
           style={{ flexDirection: "column", gap: "10px" }}
           options={brandList}
           onChange={changeBrands}
+          value={checkedList}
+          defaultValue={checkedList}
+        ></Checkbox.Group>
+      </div>
+      <div className={style.checkbox__brands}>
+        <Checkbox.Group
+          style={{ flexDirection: "column", gap: "10px" }}
+          options={sizeList}
+          onChange={changeSize}
           value={checkedList}
           defaultValue={checkedList}
         ></Checkbox.Group>
