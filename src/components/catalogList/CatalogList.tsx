@@ -32,6 +32,7 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
   const { data: product, isLoading, isError } = useSearchProductsQuery({
     page: `${currentPage}`,
     params: `${params}`,
+    page_size: '3'
   });
 
   useEffect(() => {
@@ -65,7 +66,7 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
     let pageStr = Number(page) - 1;
     setCurrentPage(String(pageStr));
     localStorage.setItem('page', JSON.stringify(String(pageStr)))
-    // window.scrollTo(0,0)
+    window.scrollTo(0,0)
   };
 
   if (isLoading) {

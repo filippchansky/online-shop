@@ -42,3 +42,12 @@ export interface Sort2 {
   unsorted: boolean;
   sorted: boolean;
 }
+
+export type Iinventory = Root2[]
+
+export interface Root2 {
+  inventoryId: number
+  productId: number
+  quantity: number
+  size: number
+}

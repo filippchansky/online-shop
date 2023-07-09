@@ -10,7 +10,7 @@ const CatalogPage:React.FC<CatalogPageProps> = ({}) => {
     
     return (
         <>
-        <CatalogTitle title='Идеальные кроссовки: совершенство стиля и функциональности'/>
+        <CatalogTitle title='Каталог'/>
         <Catalog/>
         </>
     )

@@ -41,6 +41,7 @@
 
 @media (max-width: 1350px) {
   .menu__container {
+    display: none;
     width: 100%;
     height: 50px;
     align-items: center;

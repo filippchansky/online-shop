@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { QueryArgs } from "@testing-library/react";
-import { IProducts, IResponse } from "../../models/models";
+import { Iinventory, IProducts, IResponse } from "../../models/models";
 
 export const backendApi = createApi({
   reducerPath: "backend/api",
@@ -8,16 +8,16 @@ export const backendApi = createApi({
     baseUrl: "http://159.89.20.124:8080/",
   }),
   endpoints: (build) => ({
-    searchProducts: build.query<IResponse, {page: string, params: string}>({
+    searchProducts: build.query<IResponse, {page: string, params: string, page_size: string}>({
       query: (arg) => {
-        const {page, params} = arg
+        const {page, params, page_size} = arg
         return {
-          url: `products?page_size=3&page=${page}&${params}`,
+          url: `products?page_size=${page_size}&page=${page}&${params}`,
         }
       }}),
     getProductsSize: build.query<string[], string>({
-      query: () => ({
-        url: `products/sizes`
+      query: (param) => ({
+        url: `products/sizes${param}`
       })
       // query: (arg) => {
       //   const {page, sortMethod } = arg
@@ -55,10 +55,15 @@ export const backendApi = createApi({
         method: 'POST',
         body: product
       })
+    }),
+    getInventory: build.query<[], string>({
+      query: (id) => ({
+        url: `products/${id}/sizes`
+      })
     })
   }),
 });
 
-export const { useSearchProductsQuery, useSearchProductByIdQuery, useGetProductQuery, useGetProductsBrandQuery, useAddProductMutation, useGetProductsSizeQuery } = backendApi;
+export const { useSearchProductsQuery, useSearchProductByIdQuery, useGetProductQuery, useGetProductsBrandQuery, useAddProductMutation, useGetProductsSizeQuery, useGetInventoryQuery } = backendApi;
 
 

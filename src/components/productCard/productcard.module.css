@@ -34,6 +34,18 @@
   line-height: auto;
 }
 
+.size {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: auto;
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  align-items: center;
+}
+
 .description {
     font-family: 'Montserrat';
 font-style: normal;
@@ -43,6 +55,23 @@ font-size: 15px;
 line-height: auto;
 }
 
+.btn__size {
+  padding: 5px 10px;
+  font-size: 15px;
+  border: 1px solid rgb(173, 173, 255);
+  border-radius: 5px;
+  transition: .3s;
+}
+
+.btn__size:hover {
+  border: 1px solid blue;
+  color: rgb(60, 60, 255);
+}
+
+.btn__size.active {
+  border: 1px solid blue;
+  color: blue;
+}
 
 @media (max-width:1350px) {
     .container {

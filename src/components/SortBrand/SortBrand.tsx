@@ -14,6 +14,7 @@ interface SortBrandProps {
   indeterminate: boolean;
   checkAll: boolean;
   checkedList: any; // TODO: найти правильный тип
+  setBrandSize: Function
 }
 
 const SortBrand: React.FC<SortBrandProps> = ({
@@ -26,6 +27,7 @@ const SortBrand: React.FC<SortBrandProps> = ({
   checkAll,
   checkedList,
   indeterminate,
+  setBrandSize
 }) => {
 
   const changeBrands = (checkedValues: CheckboxValueType[]) => {
@@ -37,9 +39,11 @@ const SortBrand: React.FC<SortBrandProps> = ({
     if (checkedValues.length == 0) {
       setChecked(false);
       setBrandParams("");
+      setBrandSize('')
     } else if (checkedValues.length > 0) {
       setChecked(true);
       console.log("checked = ", checkedValues);
+      setBrandSize(`?brands=${checkedValues.join(',')}`)
       setBrandParams(`&brand=${checkedValues.join(",")}`);
     }
   };
