@@ -50,4 +50,8 @@
     .products {
         justify-content: center;
     }
+    
+    .pagination {
+        justify-content: space-around;
+    }
 }
