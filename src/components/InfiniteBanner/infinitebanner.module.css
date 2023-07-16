@@ -8,6 +8,7 @@
 }
 
 .logos {
+  width: 100%;
   overflow: hidden;
   padding: 60px 0;
   background: white;
@@ -41,10 +42,51 @@
 
 .slide {
   display: inline-block;
-  animation: 20s slide infinite linear;
+  width: 100%;
+  animation: 30s slide infinite linear;
 }
 
 .slide img {
-  height: 50px;
-  margin: 0 160px;
+  height: 15vh;
+  padding: 0 2vw;
+}
+
+@media (max-width: 450px) {
+  .logos {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .slide {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @keyframes slide {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(0%);
+    }
+  }
+
+  .logos:before,
+  .logos:after {
+    display: none;
+  }
+
+
+  .slide img {
+    height: 100%;
+    width: 100%;
+    padding: 50px 10px;
+  }
+
+  .slide {
+    animation: 10s slide infinite linear;
+  }
 }
