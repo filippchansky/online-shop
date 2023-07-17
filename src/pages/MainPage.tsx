@@ -7,7 +7,7 @@ interface MainPageProps {}
 
 const MainPage: React.FC<MainPageProps> = ({}) => {
 
-    
+  document.title = 'Главная'
  
   return (
     <>

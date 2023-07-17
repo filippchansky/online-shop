@@ -1,5 +1,5 @@
 import { Spin } from 'antd';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import CatalogTitle from '../components/catalogTitle/CatalogTitle';
 import ProductCard from '../components/productCard/ProductCard';
@@ -11,9 +11,12 @@ interface AboutProductProps {
 
 const AboutProduct:React.FC<AboutProductProps> = ({}) => {
     const {id} = useParams()
+    const {data, isLoading, isError} = useSearchProductByIdQuery(id!)
+    document.title = data?.productName!
+ 
 
     // const {data, isLoading, isError} = useSearchProductsQuery(id!)
-    const {data, isLoading, isError} = useSearchProductByIdQuery(id!)
+    
     console.log(data, 'qweqwe')
     if(isLoading){
         return <Spin tip="Loading" size="large"/>

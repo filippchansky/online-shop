@@ -16,7 +16,7 @@ const TestPost: React.FC<TestPostProps> = ({}) => {
   
 
 
-  const [imgBase64, setImgBase64] = useState<any>("");
+  const [imgBase64, setImgBase64] = useState<any>('');
 
   console.log(imgBase64); // формат base64
 
@@ -65,7 +65,7 @@ const TestPost: React.FC<TestPostProps> = ({}) => {
       
       <AddProductForm/>
 
-      
+      <img src={imgBase64} alt="" />
       
     </div>
   );
