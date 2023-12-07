@@ -8,6 +8,8 @@ interface MainPageProps {}
 const MainPage: React.FC<MainPageProps> = ({}) => {
 
   document.title = 'Главная'
+
+  localStorage.setItem('page', '0')
  
   return (
     <>

@@ -42,7 +42,7 @@ const SortSize: React.FC<SortSizeProps> = ({
   };
 
   return (
-    <div className={style.checkbox__brands}>
+    <div className={style.checkbox__size}>
       <Checkbox.Group
         style={{ flexDirection: "column", gap: "10px" }}
         options={sizeList}

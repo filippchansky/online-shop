@@ -52,6 +52,7 @@ const SortBrand: React.FC<SortBrandProps> = ({
     if (e.target.checked) {
       setChecked(true);
       setBrandParams(`&brand=${brandList.join(",")}`);
+      setBrandSize(`?brands=${brandList.join(',')}`)
     } else if (e.target.checked === false) {
       setChecked(false);
     }

@@ -25,7 +25,7 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
   const { params, sort } = useParams(); // подтягиваем параметр из динамичного роута
   const [response, setResponse] = useState<IResponse>(); //ответ от сервера
   const [totalPage, setTotalPage] = useState<number>(); // всего страниц (получаем от сервера)
-  const [currentPage, setCurrentPage] = useState('0' || JSON.parse(page!)); // текущая страница (по умолчанию 0)
+  const [currentPage, setCurrentPage] = useState(JSON.parse(page!) || 0); // текущая страница (по умолчанию 0)
   console.log(params, 'params')
   
   console.log(typeof(JSON.parse(page!)), 'page')
@@ -99,7 +99,7 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
           // <Link key={page} to={`/catalog/${page}`}><Button>{page}</Button></Link>
           <button
             className={
-              String(Number(page) - 1) == currentPage
+              String(Number(page) - 1) === currentPage
                 ? [style.btn__pagination, style.active].join(" ")
                 : style.btn__pagination
             }

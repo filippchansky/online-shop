@@ -16,8 +16,7 @@ import style from "./catalogmenu.module.css";
 interface CatalogMenuProps {}
 
 const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
-  
-  const [brandSize, setBrandSize] = useState('')
+  const [brandSize, setBrandSize] = useState("");
   const [sortMethod, setSortMethod] = useState("По цене");
   const [priceParams, setPriceParams] = useState("");
   const [brandParams, setBrandParams] = useState("");
@@ -58,102 +57,102 @@ const CatalogMenu: React.FC<CatalogMenuProps> = ({}) => {
     setCheckedList([]);
     setCheckAll(false);
     setCheckedListSize([]);
-    setSizeParams('')
-    setBrandSize('')
+    setSizeParams("");
+    setBrandSize("");
   };
 
   return (
     <>
-    <MobileFilter isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-    <Link to={"/catalog/products"}>
-        <Button type="text" danger onClick={removeFilter}>
-          Сбросить фильтры
-        </Button>
-      </Link>
-      <SortPrice
-        setSortMethod={setSortMethod}
-        setPriceParams={setPriceParams}
-        sortMethod={sortMethod}
-      />
-      <SortBrand
-        setCheckedList={setCheckedList}
-        setIndeterminate={setIndeterminate}
-        setCheckAll={setCheckAll}
-        brandList={brandList}
-        setChecked={setChecked}
-        setBrandParams={setBrandParams}
-        indeterminate={indeterminate}
-        checkAll={checkAll}
-        checkedList={checkedList}
-        setBrandSize={setBrandSize}
-      />
-      <SortSize
-        sizeList={sizeList}
-        setCheckedListSize={setCheckedListSize}
-        checkedListSize={checkedListSize}
-        setSizeParams={setSizeParams}
-        brandParams ={brandParams}
-        sizeParams={sizeParams}
-      />
-      <Link to={`/catalog/${priceParams}${brandParams}${sizeParams}`}>
-        <h1
-          onClick={handleCancel}
-          className={
-            checked || priceParams || sizeParams
-              ? [style.btn, style.active].join(" ")
-              : style.btn
-          }
-        >
-          Применить
-        </h1>
-      </Link>
-    </MobileFilter>
-    <div className={style.menu__container}>
-      <Link to={"/catalog/products"}>
-        <Button type="text" danger onClick={removeFilter}>
-          Сбросить фильтры
-        </Button>
-      </Link>
-      <SortPrice
-        setSortMethod={setSortMethod}
-        setPriceParams={setPriceParams}
-        sortMethod={sortMethod}
-      />
-      <SortBrand
-        setCheckedList={setCheckedList}
-        setIndeterminate={setIndeterminate}
-        setCheckAll={setCheckAll}
-        brandList={brandList}
-        setChecked={setChecked}
-        setBrandParams={setBrandParams}
-        indeterminate={indeterminate}
-        checkAll={checkAll}
-        checkedList={checkedList}
-        setBrandSize={setBrandSize}
-      />
-      <SortSize
-        sizeList={sizeList}
-        setCheckedListSize={setCheckedListSize}
-        checkedListSize={checkedListSize}
-        setSizeParams={setSizeParams}
-        brandParams ={brandParams}
-        sizeParams={sizeParams}
-      />
-      {/* {brandList?.map(brand => (
+      <MobileFilter isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+        <Link to={"/catalog/products"}>
+          <Button type="text" danger onClick={removeFilter}>
+            Сбросить фильтры
+          </Button>
+        </Link>
+        <SortPrice
+          setSortMethod={setSortMethod}
+          setPriceParams={setPriceParams}
+          sortMethod={sortMethod}
+        />
+        <SortBrand
+          setCheckedList={setCheckedList}
+          setIndeterminate={setIndeterminate}
+          setCheckAll={setCheckAll}
+          brandList={brandList}
+          setChecked={setChecked}
+          setBrandParams={setBrandParams}
+          indeterminate={indeterminate}
+          checkAll={checkAll}
+          checkedList={checkedList}
+          setBrandSize={setBrandSize}
+        />
+        <SortSize
+          sizeList={sizeList}
+          setCheckedListSize={setCheckedListSize}
+          checkedListSize={checkedListSize}
+          setSizeParams={setSizeParams}
+          brandParams={brandParams}
+          sizeParams={sizeParams}
+        />
+        <Link to={`/catalog/${priceParams}${brandParams}${sizeParams}`}>
+          <h1
+            onClick={handleCancel}
+            className={
+              checked || priceParams || sizeParams
+                ? [style.btn, style.active].join(" ")
+                : style.btn
+            }
+          >
+            Применить
+          </h1>
+        </Link>
+      </MobileFilter>
+      <div className={style.menu__container}>
+        <Link to={"/catalog/products"}>
+          <Button type="text" danger onClick={removeFilter}>
+            Сбросить фильтры
+          </Button>
+        </Link>
+        <SortPrice
+          setSortMethod={setSortMethod}
+          setPriceParams={setPriceParams}
+          sortMethod={sortMethod}
+        />
+        <SortBrand
+          setCheckedList={setCheckedList}
+          setIndeterminate={setIndeterminate}
+          setCheckAll={setCheckAll}
+          brandList={brandList}
+          setChecked={setChecked}
+          setBrandParams={setBrandParams}
+          indeterminate={indeterminate}
+          checkAll={checkAll}
+          checkedList={checkedList}
+          setBrandSize={setBrandSize}
+        />
+        <SortSize
+          sizeList={sizeList}
+          setCheckedListSize={setCheckedListSize}
+          checkedListSize={checkedListSize}
+          setSizeParams={setSizeParams}
+          brandParams={brandParams}
+          sizeParams={sizeParams}
+        />
+        {/* {brandList?.map(brand => (
         <Checkbox>{brand}</Checkbox>
       ))} */}
-      <Link to={`/catalog/${priceParams}${brandParams}${sizeParams}`}>
-        <h1
-          className={
-            checked || priceParams || sizeParams
-              ? [style.btn, style.active].join(" ")
-              : style.btn
-          }
-        >
-          Применить
-        </h1>
-      </Link>
-    </div>
+        <Link to={`/catalog/${priceParams}${brandParams}${sizeParams}`}>
+          <h1
+            className={
+              checked || priceParams || sizeParams
+                ? [style.btn, style.active].join(" ")
+                : style.btn
+            }
+          >
+            Применить
+          </h1>
+        </Link>
+      </div>
     </>
   );
 };
