@@ -17,6 +17,8 @@ import {
 } from "../../store/backend/backend.api";
 import CatalogCard from "../catalogCard/CatalogCard";
 import style from "./cataloglist.module.css";
+import ContentLoader from "react-content-loader";
+import SkeletonProduct from "../UI/skeleton/SkeletonProduct";
 
 interface CatalogListProps {}
 
@@ -71,9 +73,10 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
 
   if (isLoading) {
     return (
-      <div className={style.spin}>
-        <Spin tip="Loading" size="large" />
-      </div>
+      // <div className={style.spin}>
+      //   <Spin tip="Loading" size="large" />
+      // </div>
+      <SkeletonProduct/>
     );
   }
 
