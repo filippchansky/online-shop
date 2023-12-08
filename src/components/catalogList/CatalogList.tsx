@@ -81,7 +81,11 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
   }
 
   if(isError) {
-    return <h1>Ошибка</h1>
+    return (
+      <div className="w-full bg-black">
+        <h1 className="text-red-500">1123321</h1>
+      </div>
+    )
   }
 
   return (
