@@ -13,6 +13,7 @@ export const backendApi = createApi({
         const {page, params, page_size} = arg
         return {
           url: `products?page_size=${page_size}&page=${page}&${params}`,
+          timeout: 1000
         }
       }}),
     getProductsSize: build.query<string[], string>({
