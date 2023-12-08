@@ -1,39 +1,38 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/Logo.svg";
-import putin from '../../img/bannerMobile.jpg'
+import putin from "../../img/bannerMobile.jpg";
 import Burger from "../UI/burgerMenu/Burger";
 import ModalWindow from "../UI/modalWindow/ModalWindow";
 import style from "./header.module.css";
 import { useSearchProductsQuery } from "../../store/backend/backend.api";
+// import asd from "../../../public/sound/gimn.mp3"
 
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = ({}) => {
   const [burgerActive, setBurgerActive] = useState(false);
-  const [modalActive, setModalActive] = useState(false)
+  const [modalActive, setModalActive] = useState(false);
 
-  
-
-  function hello () {
-    alert('hello')
+  function hello() {
+    alert("hello");
   }
 
   return (
     <header className={style.header}>
       <Burger active={burgerActive} setActive={setBurgerActive}>
         <div className={style.burger__header}>
-          <Link to={"/"} onClick = {() => setBurgerActive(false)}>
+          <Link to={"/"} onClick={() => setBurgerActive(false)}>
             <img src={logo} alt="" />
           </Link>
         </div>
-          <ul className={style.burger__nav}>
-          <Link to={"/catalog/products"} onClick = {() => setBurgerActive(false)}>
-              <li className={style.nav__item}>Каталог</li>
-            </Link>
-            <li className={style.nav__item}>Карточка</li>
-            <li className={style.nav__item}>Меню 3</li>
-          </ul>
+        <ul className={style.burger__nav}>
+          <Link to={"/catalog/products"} onClick={() => setBurgerActive(false)}>
+            <li className={style.nav__item}>Каталог</li>
+          </Link>
+          <li className={style.nav__item}>Карточка</li>
+          <li className={style.nav__item}>Меню 3</li>
+        </ul>
       </Burger>
       <div className={`${style.header__container} container`}>
         <div
@@ -58,7 +57,12 @@ const Header: React.FC<HeaderProps> = ({}) => {
             <li className={style.nav__item}>Меню 3</li>
           </ul>
         </nav>
-        <button className={style.btn__header} onClick = {()=> setModalActive(!modalActive)}>Кнопка</button>
+        <button
+          className={style.btn__header}
+          onClick={() => setModalActive(!modalActive)}
+        >
+          Кнопка
+        </button>
         <ModalWindow active={modalActive} setActive={setModalActive}>
           <img src={putin} alt="" />
         </ModalWindow>

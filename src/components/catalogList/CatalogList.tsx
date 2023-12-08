@@ -43,7 +43,7 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
     } else {
       setCurrentPage(JSON.parse(page!));
     }
-  }, [params]); // при изменении query параметров меняет текущую страницу на первую
+  }, [page, params]); // при изменении query параметров меняет текущую страницу на первую
 
   useEffect(() => {
     if (params !== undefined) {
@@ -55,7 +55,7 @@ const CatalogList: React.FC<CatalogListProps> = ({}) => {
   }, [product?.content]); // закидываем ответ от сервера в состояние (хз как сделать по другому)
 
   let pageArr = [];
-  if (response?.totalPages != undefined) {
+  if (response?.totalPages !== undefined) {
     for (let i = 0; i < response.totalPages; i++) {
       // насколько правильно данное решение не мне судить, но это работает
       pageArr.push(String(i + 1));

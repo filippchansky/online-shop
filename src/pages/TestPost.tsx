@@ -27,11 +27,32 @@ const TestPost: React.FC<TestPostProps> = ({}) => {
     reader.readAsDataURL(file);
     reader.onload = () => {
       setImgBase64(reader.result);
+      sendImageToServer(String(reader.result))
     };
   };
+  const sendImageToServer = async (base64Image: string) => {
+    try {
+        const response = await fetch('http://localhost:8080/productImage', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({productId: 1, picture: base64Image}),
+        });
+
+        if (response.ok) {
+            console.log('Image successfully uploaded');
+        } else {
+            console.log('An error occurred during the upload process');
+        }
+    } catch (error) {
+        console.log('An error occurred during the fetch process');
+    }
+};
 
   const submitPost = (e: React.FormEvent) => {
     e.preventDefault();
+    
   };
 
   

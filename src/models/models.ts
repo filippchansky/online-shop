@@ -51,3 +51,10 @@ export interface Root2 {
   quantity: number
   size: number
 }
+
+
+export interface IProductImages {
+  productImageId: number
+  productId: number
+  picture: string
+}
