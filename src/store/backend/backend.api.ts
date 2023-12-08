@@ -16,15 +16,9 @@ export const backendApi = createApi({
         const { page, params, page_size } = arg;
         return {
           url: `products?page_size=${page_size}&page=${page}&${params}`,
-<<<<<<< HEAD
         };
       },
     }),
-=======
-          timeout: 1000
-        }
-      }}),
->>>>>>> cdd3ffcb40227c4494617bad861ff7da528af2b5
     getProductsSize: build.query<string[], string>({
       query: (param) => ({
         url: `products/sizes${param}`,
